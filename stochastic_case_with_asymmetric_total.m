@@ -232,49 +232,49 @@ while b<=10 %γ
             compare=[];
             f.compare=[];
             if U1(t)==1
-                compare=[compare;a*aoi(1)-b*(1/150)*Q(1)-0.2*price(1)];%profit value
+                compare=[compare;a*aoi(1)-b*(1/150)*Q(1)-0.3*price(1)];%profit value
                 f.compare=[f.compare;1];
             end
             if U2(t)==1
-                compare=[compare;a*aoi(2)-b*(1/150)*Q(2)-0.2*price(2)];
+                compare=[compare;a*aoi(2)-b*(1/150)*Q(2)-0.3*price(2)];
                 f.compare=[f.compare;2];
             end
             if U3(t)==1
-                compare=[compare;a*aoi(3)-b*(1/150)*Q(3)-0.2*price(3)];
+                compare=[compare;a*aoi(3)-b*(1/150)*Q(3)-0.3*price(3)];
                 f.compare=[f.compare;3];
             end
             if U4(t)==1
-                compare=[compare;a*aoi(4)-b*(1/150)*Q(4)-0.2*price(4)];
+                compare=[compare;a*aoi(4)-b*(1/150)*Q(4)-0.3*price(4)];
                 f.compare=[f.compare;4];
             end
             if U5(t)==1
-                compare=[compare;a*aoi(5)-b*(1/150)*Q(5)-0.2*price(5)];
+                compare=[compare;a*aoi(5)-b*(1/150)*Q(5)-0.3*price(5)];
                 f.compare=[f.compare;5];
             end
             if U6(t)==1
-                compare=[compare;a*aoi(6)-b*(1/150)*Q(6)-0.2*price(6)];
+                compare=[compare;a*aoi(6)-b*(1/150)*Q(6)-0.3*price(6)];
                 f.compare=[f.compare;6];
             end
             if U7(t)==1
-                compare=[compare;a*aoi(7)-b*(1/150)*Q(7)-0.2*price(7)];
+                compare=[compare;a*aoi(7)-b*(1/150)*Q(7)-0.3*price(7)];
                 f.compare=[f.compare;7];
             end
             if U8(t)==1
-                compare=[compare;a*aoi(8)-b*(1/150)*Q(8)-0.2*price(8)];
+                compare=[compare;a*aoi(8)-b*(1/150)*Q(8)-0.3*price(8)];
                 f.compare=[f.compare;8];
             end
             if U9(t)==1
-                compare=[compare;a*aoi(9)-b*(1/150)*Q(9)-0.2*price(9)];
+                compare=[compare;a*aoi(9)-b*(1/150)*Q(9)-0.3*price(9)];
                 f.compare=[f.compare;9];
             end
             if U10(t)==1
-                compare=[compare;a*aoi(10)-b*(1/150)*Q(10)-0.2*price(10)];
+                compare=[compare;a*aoi(10)-b*(1/150)*Q(10)-0.3*price(10)];
                 f.compare=[f.compare;10];
             end
             if isempty(compare)
                 v =1;
                 while v <= sevices
-                    compare=[compare;a*aoi(v)-b*(1/150)*Q(v)-0.2*price(v)];
+                    compare=[compare;a*aoi(v)-b*(1/150)*Q(v)-0.3*price(v)];
                     v=v+1;
                 end
 
@@ -456,7 +456,7 @@ while b<=10 %γ
         y1=y;
         Y1=account;
     end
-    if b==1
+    if b==2
         y2=y;
         Y2=account;
     end
@@ -470,9 +470,9 @@ while b<=10 %γ
     end
 
     if b==0
-        b=1;
+        b=2;
     else
-        if b==1
+        if b==2
             b=5;
         else
             if b==5
@@ -498,29 +498,29 @@ for k = 1:length(b)
     b(k).CData = zdata;
     b(k).FaceColor = 'interp';
 end
-%set(gca,'xticklabel',{'3.5','4','4.5','5','5.5'})    %x coordinate axis scale value
-set(gca,'yticklabel',{'γ=0','γ=1','γ=5','γ=10'})    %y coordinate axis scale value
+set(gca,'xticklabel',{'PoI 1','PoI 2','PoI 3','PoI 4','PoI 5','PoI 6','PoI 7','PoI 8','PoI 9','PoI 10'})    %x coordinate axis scale value
+set(gca,'yticklabel',{'\gamma=0','\gamma=2','\gamma=5','\gamma=10'})    %y coordinate axis scale value
 zlim([0,1200]);      %z coordinate axis scale value
 hXLabel = xlabel('PoIs','Rotation',18,'Position',[5 6.5 5]);
 %hYLabel = ylabel('γ','Rotation',-40,'Position',[-1 2 0]);
-hZLabel = zlabel('Times','Rotation',-90,'Position',[-1.5 0 800]);
+hZLabel = zlabel('Times','Rotation',-90,'Position',[-1 0 800]);
 set(gca,'XGrid', 'off', 'YGrid', 'off','ZGrid', 'on')
-hTitle = title('Service Frequency of PoIs \{β=10\}');
-set(hTitle, 'FontSize', 12, 'FontWeight' , 'bold')
+hTitle = title('Service Frequency of PoIs \{\beta=10\}');
+%set(hTitle, 'FontSize', 12, 'FontWeight' , 'bold')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure(2)
-axis([0 10 0 1]);
+axis([0 10 0 0.7]);
 set(gca,'XTick',[0:2:10]) %x-axis range 0-10, interval 2
-set(gca,'YTick',[0:0.1:1]) %Y-axis range 0-1, interval 0.1
+set(gca,'YTick',[0:0.1:0.7]) %Y-axis range 0-1, interval 0.1
 axis square;
 hold on;
 % Add title and tags
-%title('Asymmetric case of PoA in terms of average total age.');
-xlabel('Reward Rate β','FontSize',15);
+%title('Symmetric case of PoA in terms of average max age.');
+xlabel('Reward Rate \beta','FontSize',15);
 ylabel('Price of Anarchy (PoA)','FontSize',15);
 
 
 plot(x,y1,'-d',x,y2,'-h',x,y3,'-x',x,y4,'-s','linewidth',2,'MarkerSize',5); % linear, color, marker
-legend('γ=0','γ=1','γ=5','γ=10','FontSize',15);   % Upper right corner mark
+legend('\gamma=0','\gamma=2','\gamma=5','\gamma=10','FontSize',15);   % Upper right corner mark
 grid on
 
