@@ -57,7 +57,7 @@ while a<=1.00 %β
 
 
     t=1;
-    T=10000;%num of time t
+    T=100000;%num of time t
     cell=[];
 
 
@@ -130,9 +130,9 @@ while a<=1.00 %β
 
     if abs(a-0.03) < 0.001
         figure(1)
-        axis([0 10 0 2000]);
+        axis([0 10 0 1500]);
         set(gca,'XTick',[0:1:10]) %x axis range 0-10, interval 1
-        set(gca,'YTick',[0:100:2000]) %y axis range 0-2000, interval 100
+        set(gca,'YTick',[0:100:1500]) %y axis range 0-2000, interval 100
         axis square;
         hold on;
 
@@ -171,10 +171,11 @@ axis square;
 hold on;
 % Add title and tags
 title('PoA');
-xlabel('Reward Rate β');
-ylabel('Price of Anarchy(PoA)');
+xlabel('Reward Rate \beta','FontSize',15);
+ylabel('Price of Anarchy (PoA)','FontSize',15);
 
 plot(x,y1,'-*r',x,y2,'-ob','linewidth',2,'MarkerSize',6); % linear, color, marker
+legend('AVG Maximum Age','AVG Total Age','FontSize',12);   % Upper right corner mark
 grid on
 
 
