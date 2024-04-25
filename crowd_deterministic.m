@@ -13,8 +13,6 @@ y1= [];
 y2= [];
 
 a=0;
-ac=[];
-
 while a<=1.00 %β
 
     opt.aoi =[];
@@ -31,23 +29,29 @@ while a<=1.00 %β
         i=i+1;
     end
 
-    if abs(a-0.03) < 0.001 %draw data
-        opt.account =[];
+    if abs(a-0.01) < 0.001 %draw data
+        account1 =[];
         i =1;
         while i <= sevices
-            opt.account = [opt.account;0];
+            account1 = [account1;0];
             i=i+1;
         end
-        account =[];
+    end
+    if abs(a-0.10) < 0.001 %draw data
+        account2 =[];
         i =1;
         while i <= sevices
-            account = [account;0];
+            account2 = [account2;0];
             i=i+1;
         end
-
-    else
-        ac = [ac;a];
-
+    end
+    if abs(a-0.50) < 0.001 %draw data
+        account3 =[];
+        i =1;
+        while i <= sevices
+            account3 = [account3;0];
+            i=i+1;
+        end
     end
 
     opt.maxaoi=0;
@@ -57,7 +61,7 @@ while a<=1.00 %β
 
 
     t=1;
-    T=100000;%num of time t
+    T=10000;%num of time t
     cell=[];
 
 
@@ -89,10 +93,6 @@ while a<=1.00 %β
 
         opt.aoi(B(1))=0;%After opt selects the service node, aoi is set to zero.
 
-        if abs(a-0.03) < 0.001
-            opt.account(B(1))=opt.account(B(1))+1;%opt counts the number of calls to each node
-        end
-
         [M,I] = max(aoi);
         B=[I;M];
         maxaoi = maxaoi+B(2);% cumulative incentive maximum aoi
@@ -121,14 +121,23 @@ while a<=1.00 %β
 
         aoi(B(1))=0;% Incentive to set aoi to zero after selecting service node
 
-        if abs(a-0.03) < 0.001
-            account(B(1))=account(B(1))+1;%Incentive statistics of the number of calls of each node
+        if abs(a-0.01) < 0.001
+            account1(B(1))=account1(B(1))+1;%Incentive statistics of the number of calls of each node
+            D1=a;
+        end
+        if abs(a-0.10) < 0.001
+            account2(B(1))=account2(B(1))+1;%Incentive statistics of the number of calls of each node
+            D2=a;
+        end
+        if abs(a-0.50) < 0.001
+            account3(B(1))=account3(B(1))+1;%Incentive statistics of the number of calls of each node
+            D3=a;
         end
 
         t=t+1;
     end
 
-    if abs(a-0.03) < 0.001
+    if abs(a-0.01) < 0.001
         figure(1)
         axis([0 10 0 1500]);
         set(gca,'XTick',[0:1:10]) %x axis range 0-10, interval 1
@@ -137,13 +146,65 @@ while a<=1.00 %β
         hold on;
 
         % Add title and tags
-        title('Frequency of Node');
-        xlabel('Node');
+        title('Service Frequency of PoIs');
+        xlabel('PoIs');
         ylabel('Times');
 
 
         X = 1:1:sevices;
-        Y = account;
+        Y = account1;
+        tbar=bar(X,Y);
+
+        xtips = tbar.XEndPoints;
+        ytips = tbar.YEndPoints;
+        labels = string(tbar.YData);
+        text(xtips,ytips,labels,'HorizontalAlignment','center',...
+            'VerticalAlignment','bottom')
+
+        line([1:length(X)], Y, 'Color', 'r', 'LineStyle', '--', 'Marker', 'o')
+    end
+    if abs(a-0.10) < 0.001
+        figure(2)
+        axis([0 10 0 1200]);
+        set(gca,'XTick',[0:1:10]) %x axis range 0-10, interval 1
+        set(gca,'YTick',[0:100:1200]) %y axis range 0-2000, interval 100
+        axis square;
+        hold on;
+
+        % Add title and tags
+        title('Service Frequency of PoIs');
+        xlabel('PoIs');
+        ylabel('Times');
+
+
+        X = 1:1:sevices;
+        Y = account2;
+        tbar=bar(X,Y);
+
+        xtips = tbar.XEndPoints;
+        ytips = tbar.YEndPoints;
+        labels = string(tbar.YData);
+        text(xtips,ytips,labels,'HorizontalAlignment','center',...
+            'VerticalAlignment','bottom')
+
+        line([1:length(X)], Y, 'Color', 'r', 'LineStyle', '--', 'Marker', 'o')
+    end
+    if abs(a-0.50) < 0.001
+        figure(3)
+        axis([0 10 0 1200]);
+        set(gca,'XTick',[0:1:10]) %x axis range 0-10, interval 1
+        set(gca,'YTick',[0:100:1200]) %y axis range 0-2000, interval 100
+        axis square;
+        hold on;
+
+        % Add title and tags
+        title('Service Frequency of PoIs');
+        xlabel('PoIs');
+        ylabel('Times');
+
+
+        X = 1:1:sevices;
+        Y = account3;
         tbar=bar(X,Y);
 
         xtips = tbar.XEndPoints;
@@ -163,19 +224,17 @@ while a<=1.00 %β
 
 end
 
-figure(2)
+figure(4)
 axis([0 1 0 1]);
 set(gca,'XTick',[0:0.2:1]) %x axis range 0-1, interval 0.2
 set(gca,'YTick',[0:0.1:1]) %y axis range 0-1, interval 0.1
 axis square;
 hold on;
 % Add title and tags
-title('PoA');
+%title('PoA');
 xlabel('Reward Rate \beta','FontSize',15);
 ylabel('Price of Anarchy (PoA)','FontSize',15);
 
 plot(x,y1,'-*r',x,y2,'-ob','linewidth',2,'MarkerSize',6); % linear, color, marker
-legend('AVG Maximum Age','AVG Total Age','FontSize',12);   % Upper right corner mark
+legend('AVG Maximum Age','AVG Total Age','FontSize',15);   % Upper right corner mark
 grid on
-
-

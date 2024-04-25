@@ -1215,6 +1215,40 @@ xlabel('Reward Rate \beta','FontSize',15);
 ylabel('Price of Anarchy (PoA)','FontSize',15);
 
 
+plot(x,y21,'-d',x,y22,'-h',x,y23,'-x',x,y24,'-s',x,y25,'-+','linewidth',2,'MarkerSize',5); % linear, color, marker
+legend('Incentive Strategy','Without Incentive','Random Strategy','LBFS','FBFS','FontSize',15);   % Upper right corner mark
+grid on
+
+
+figure(3)
+axis([0 10 0 1]);
+set(gca,'XTick',[0:2:10]) %x-axis range 0-10, interval 2
+set(gca,'YTick',[0:0.1:1]) %Y-axis range 0-1, interval 0.1
+axis square;
+hold on;
+% Add title and tags
+%title('Symmetric case of PoA in terms of average max age.');
+xlabel('Reward Rate \beta','FontSize',15);
+ylabel('Price of Anarchy (PoA)','FontSize',15);
+
+
+plot(x,y31,'-d',x,y32,'-h',x,y33,'-x',x,y34,'-s',x,y35,'-+','linewidth',2,'MarkerSize',5); % linear, color, marker
+legend('Incentive Strategy','Without Incentive','Random Strategy','LBFS','FBFS','FontSize',15);   % Upper right corner mark
+grid on
+
+
+figure(4)
+axis([0 10 0 1]);
+set(gca,'XTick',[0:2:10]) %x-axis range 0-10, interval 2
+set(gca,'YTick',[0:0.1:1]) %Y-axis range 0-1, interval 0.1
+axis square;
+hold on;
+% Add title and tags
+%title('Symmetric case of PoA in terms of average max age.');
+xlabel('Reward Rate \beta','FontSize',15);
+ylabel('Price of Anarchy (PoA)','FontSize',15);
+
+
 plot(x,y41,'-d',x,y42,'-h',x,y43,'-x',x,y44,'-s',x,y45,'-+','linewidth',2,'MarkerSize',5); % linear, color, marker
 legend('Incentive Strategy','Without Incentive','Random Strategy','LBFS','FBFS','FontSize',15);   % Upper right corner mark
 grid on
