@@ -36,6 +36,7 @@ while b<=10 %γ
     y3= [];
     y4= [];
     y5= [];
+    y6= [];
 
     a=0.005;
 
@@ -59,6 +60,13 @@ while b<=10 %γ
         i =1;
         while i <= sevices
             without_aoi = [without_aoi;0];
+            i=i+1;
+        end
+
+        greedy_aoi =[];
+        i =1;
+        while i <= sevices
+            greedy_aoi = [greedy_aoi;0];
             i=i+1;
         end
 
@@ -104,6 +112,13 @@ while b<=10 %γ
             i=i+1;
         end
 
+        greedy_Q =[];
+        i =1;
+        while i <= sevices
+            greedy_Q = [greedy_Q;0];
+            i=i+1;
+        end
+
         random_Q =[];
         i =1;
         while i <= sevices
@@ -128,6 +143,7 @@ while b<=10 %γ
         opt.total.Q.L=0;
         total.Q.L=0;
         without_total.Q.L=0;
+        greedy_total.Q.L=0;
         random_total.Q.L=0;
         lbfs_total.Q.L=0;
         fbfs_total.Q.L=0;
@@ -135,6 +151,7 @@ while b<=10 %γ
         opt.maxaoi=0;
         maxaoi=0;
         without_maxaoi=0;
+        greedy_maxaoi=0;
         random_maxaoi=0;
         lbfs_maxaoi=0;
         fbfs_maxaoi=0;
@@ -142,6 +159,7 @@ while b<=10 %γ
         opt.average.aoi=zeros(sevices,T);
         average.aoi=zeros(sevices,T);
         without_average.aoi=zeros(sevices,T);
+        greedy_average.aoi=zeros(sevices,T);
         random_average.aoi=zeros(sevices,T);
         lbfs_average.aoi=zeros(sevices,T);
         fbfs_average.aoi=zeros(sevices,T);
@@ -162,6 +180,12 @@ while b<=10 %γ
         i =1;
         while i <= sevices
             without_account = [without_account,0];
+            i=i+1;
+        end
+        greedy_account =[];
+        i =1;
+        while i <= sevices
+            greedy_account = [greedy_account,0];
             i=i+1;
         end
         random_account =[];
@@ -622,6 +646,129 @@ while b<=10 %γ
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             i =1;
             while i <= sevices
+                greedy_total.Q.L = greedy_total.Q.L+greedy_Q(i);%greedy total queue length
+                i=i+1;
+            end
+
+            if A(t)==1%%node service request is TRUE
+                [M,I] = max(greedy_aoi);
+                B=[I;M];
+                greedy_Q(I)=greedy_Q(I)+1;%The strategy is to join the max aoi
+                greedy_account(I)=greedy_account(I)+1;
+            end
+
+            i =1;
+            while i <= sevices
+                greedy_average.aoi(i,t) = greedy_aoi(i);%Count greedy's aoi into a two-dimensional array
+                i=i+1;
+            end
+
+
+            [M,I] = max(greedy_aoi);
+            B=[I;M];
+            greedy_maxaoi = greedy_maxaoi+ulist(I)*B(2);
+            %             greedy_maxaoi = greedy_maxaoi+B(2);
+
+            i =1;
+            while i <= sevices
+                greedy_aoi(i) = greedy_aoi(i)+1;%greedy's Aoi overall +1
+                i=i+1;
+            end
+
+            if U1(t)==1%Node 1 service is TRUE
+                if greedy_Q(1)~=0
+                    greedy_aoi(1)=0;
+                    greedy_Q(1)=greedy_Q(1)-1;
+                    if greedy_Q(1) <0
+                        greedy_Q(1)=0;
+                    end
+                end
+            end
+            if U2(t)==1%Node 2 service is TRUE
+                if greedy_Q(2)~=0
+                    greedy_aoi(2)=0;
+                    greedy_Q(2)=greedy_Q(2)-1;
+                    if greedy_Q(2) <0
+                        greedy_Q(2)=0;
+                    end
+                end
+            end
+            if U3(t)==1%Node 3 service is TRUE
+                if greedy_Q(3)~=0
+                    greedy_aoi(3)=0;
+                    greedy_Q(3)=greedy_Q(3)-1;
+                    if greedy_Q(3) <0
+                        greedy_Q(3)=0;
+                    end
+                end
+            end
+            if U4(t)==1%Node 4 service is TRUE
+                if greedy_Q(4)~=0
+                    greedy_aoi(4)=0;
+                    greedy_Q(4)=greedy_Q(4)-1;
+                    if greedy_Q(4) <0
+                        greedy_Q(4)=0;
+                    end
+                end
+            end
+            if U5(t)==1%Node 5 service is TRUE
+                if greedy_Q(5)~=0
+                    greedy_aoi(5)=0;
+                    greedy_Q(5)=greedy_Q(5)-1;
+                    if greedy_Q(5) <0
+                        greedy_Q(5)=0;
+                    end
+                end
+            end
+            if U6(t)==1%Node 6 service is TRUE
+                if greedy_Q(6)~=0
+                    greedy_aoi(6)=0;
+                    greedy_Q(6)=greedy_Q(6)-1;
+                    if greedy_Q(6) <0
+                        greedy_Q(6)=0;
+                    end
+                end
+            end
+            if U7(t)==1%Node 7 service is TRUE
+                if greedy_Q(7)~=0
+                    greedy_aoi(7)=0;
+
+                    greedy_Q(7)=greedy_Q(7)-1;
+                    if greedy_Q(7) <0
+                        greedy_Q(7)=0;
+                    end
+                end
+            end
+            if U8(t)==1%Node 8 service is TRUE
+                if greedy_Q(8)~=0
+                    greedy_aoi(8)=0;
+                    greedy_Q(8)=greedy_Q(8)-1;
+                    if greedy_Q(8) <0
+                        greedy_Q(8)=0;
+                    end
+                end
+            end
+            if U9(t)==1%Node 9 service is TRUE
+                if greedy_Q(9)~=0
+                    greedy_aoi(9)=0;
+                    greedy_Q(9)=greedy_Q(9)-1;
+                    if greedy_Q(9) <0
+                        greedy_Q(9)=0;
+                    end
+                end
+            end
+            if U10(t)==1%Node 10 service is TRUE
+                if greedy_Q(10)~=0
+                    greedy_aoi(10)=0;
+                    greedy_Q(10)=greedy_Q(10)-1;
+                    if greedy_Q(10) <0
+                        greedy_Q(10)=0;
+                    end
+                end
+            end
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            i =1;
+            while i <= sevices
                 random_total.Q.L = random_total.Q.L+random_Q(i);%random total queue length
                 i=i+1;
             end
@@ -1069,6 +1216,19 @@ while b<=10 %γ
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         i =1;
+        greedy_bignumaoi=0;
+        while i <= sevices
+            j =1;
+            numaoi=0;
+            while j <= T
+                numaoi = numaoi + greedy_average.aoi(i,j);
+                j=j+1;
+            end
+            greedy_bignumaoi=greedy_bignumaoi+(numaoi/T)*ulist(i);
+            i=i+1;
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        i =1;
         random_bignumaoi=0;
         while i <= sevices
             j =1;
@@ -1112,9 +1272,10 @@ while b<=10 %γ
         x = [x;a] ;
         y1= [y1;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*total.Q.L)/T)+a*bignumaoi)];%POA
         y2= [y2;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*without_total.Q.L)/T)+a*without_bignumaoi)];%POA
-        y3= [y3;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*random_total.Q.L)/T)+a*random_bignumaoi)];%POA
-        y4= [y4;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*lbfs_total.Q.L)/T)+a*lbfs_bignumaoi)];%POA
-        y5= [y5;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*fbfs_total.Q.L)/T)+a*fbfs_bignumaoi)];%POA
+        y3= [y3;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*greedy_total.Q.L)/T)+a*greedy_bignumaoi)];%POA
+        y4= [y4;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*random_total.Q.L)/T)+a*random_bignumaoi)];%POA
+        y5= [y5;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*lbfs_total.Q.L)/T)+a*lbfs_bignumaoi)];%POA
+        y6= [y6;1-((((b*(1/15)/sevices)*opt.total.Q.L)/T)+a*opt.bignumaoi)/((((b*(1/15)/sevices)*fbfs_total.Q.L)/T)+a*fbfs_bignumaoi)];%POA
 
         if a<0.01
             a=a+0.001;
@@ -1130,11 +1291,13 @@ while b<=10 %γ
         y3(1)=1;
         y4(1)=1;
         y5(1)=1;
+        y6(1)=1;
         y11=y1;
         y12=y2;
         y13=y3;
         y14=y4;
         y15=y5;
+        y16=y6;
         Y1=account;
     end
     if b==2
@@ -1143,6 +1306,7 @@ while b<=10 %γ
         y23=y3;
         y24=y4;
         y25=y5;
+        y26=y6;
         Y2=account;
     end
     if b==5
@@ -1151,6 +1315,7 @@ while b<=10 %γ
         y33=y3;
         y34=y4;
         y35=y5;
+        y36=y6;
         Y3=account;
     end
     if b==10
@@ -1159,6 +1324,7 @@ while b<=10 %γ
         y43=y3;
         y44=y4;
         y45=y5;
+        y46=y6;
         Y4=account;
     end
 
@@ -1215,8 +1381,8 @@ xlabel('Reward Rate \beta','FontSize',15);
 ylabel('Price of Anarchy (PoA)','FontSize',15);
 
 
-plot(x,y21,'-d',x,y22,'-h',x,y23,'-x',x,y24,'-s',x,y25,'-+','linewidth',2,'MarkerSize',5); % linear, color, marker
-legend('Incentive Strategy','Without Incentive','Random Strategy','LBFS','FBFS','FontSize',15);   % Upper right corner mark
+plot(x,y21,'-d',x,y22,'-h',x,y23,'-x',x,y24,'-s',x,y25,'-+',x,y26,'-o','linewidth',2,'MarkerSize',5); % linear, color, marker
+legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS Strategy','FBFS Strategy','FontSize',15);   % Upper right corner mark
 grid on
 
 
@@ -1232,8 +1398,8 @@ xlabel('Reward Rate \beta','FontSize',15);
 ylabel('Price of Anarchy (PoA)','FontSize',15);
 
 
-plot(x,y31,'-d',x,y32,'-h',x,y33,'-x',x,y34,'-s',x,y35,'-+','linewidth',2,'MarkerSize',5); % linear, color, marker
-legend('Incentive Strategy','Without Incentive','Random Strategy','LBFS','FBFS','FontSize',15);   % Upper right corner mark
+plot(x,y31,'-d',x,y32,'-h',x,y33,'-x',x,y34,'-s',x,y35,'-+',x,y36,'-o','linewidth',2,'MarkerSize',5); % linear, color, marker
+legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS Strategy','FBFS Strategy','FontSize',15);   % Upper right corner mark
 grid on
 
 
@@ -1249,7 +1415,7 @@ xlabel('Reward Rate \beta','FontSize',15);
 ylabel('Price of Anarchy (PoA)','FontSize',15);
 
 
-plot(x,y41,'-d',x,y42,'-h',x,y43,'-x',x,y44,'-s',x,y45,'-+','linewidth',2,'MarkerSize',5); % linear, color, marker
-legend('Incentive Strategy','Without Incentive','Random Strategy','LBFS','FBFS','FontSize',15);   % Upper right corner mark
+plot(x,y41,'-d',x,y42,'-h',x,y43,'-x',x,y44,'-s',x,y45,'-+',x,y46,'-o','linewidth',2,'MarkerSize',5); % linear, color, marker
+legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS Strategy','FBFS Strategy','FontSize',15);   % Upper right corner mark
 grid on
 
