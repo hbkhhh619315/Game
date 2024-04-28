@@ -1350,72 +1350,64 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure(1)
 data = [Y1;Y2;Y3;Y4];
-
-b = bar3(data,0.7);    %0.7Represents the width of a single column
-colorbar               %Z-axis numerical color bar
-caxis([1,10000]);     %Color bar value range
+b = bar3(data,0.7); %0.7Represents the width of a single column
+colorbar %Z-axis numerical color bar
+caxis([1,10000]); %Color bar value range
 for k = 1:length(b)
     zdata = b(k).ZData;
     b(k).CData = zdata;
     b(k).FaceColor = 'interp';
 end
-set(gca,'xticklabel',{'PoI 1','PoI 2','PoI 3','PoI 4','PoI 5','PoI 6','PoI 7','PoI 8','PoI 9','PoI 10'})    %x coordinate axis scale value
-set(gca,'yticklabel',{'\gamma=0','\gamma=2','\gamma=5','\gamma=10'})    %y coordinate axis scale value
-zlim([0,10000]);      %z coordinate axis scale value
-hXLabel = xlabel('PoIs','Rotation',18,'Position',[5 6.5 5]);
+set(gca,'xticklabel',{'PoI 1','PoI 2','PoI 3','PoI 4','PoI 5','PoI 6','PoI 7','PoI 8','PoI 9','PoI 10'},'FontSize',30) %x coordinate axis scale value
+set(gca,'yticklabel',{'\gamma=0','\gamma=2','\gamma=5','\gamma=10'},'FontSize',30) %y coordinate axis scale value
+zlim([0,10000]); %z coordinate axis scale value
+hXLabel = xlabel('PoIs','Rotation',18,'Position',[5 6.5 5],'FontSize',50);
 %hYLabel = ylabel('γ','Rotation',-40,'Position',[-1 2 0]);
-hZLabel = zlabel('Times','Rotation',-90,'Position',[-1 0 800]);
+hZLabel = zlabel('Times','Rotation',-90,'Position',[-1 0 800],'FontSize',50);
 set(gca,'XGrid', 'off', 'YGrid', 'off','ZGrid', 'on')
 hTitle = title('Service Frequency of PoIs \{\beta=10\}');
-%set(hTitle, 'FontSize', 12, 'FontWeight' , 'bold')
+set(hTitle, 'FontSize', 50, 'FontWeight' , 'bold')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure(2)
 axis([0 10 0 1]);
-set(gca,'XTick',[0:2:10]) %x-axis range 0-10, interval 2
-set(gca,'YTick',[0:0.1:1]) %Y-axis range 0-1, interval 0.1
+set(gca,'XTick',[0:2:10],'FontSize',25) %x-axis range 0-10, interval 2
+set(gca,'YTick',[0:0.1:1],'FontSize',25) %Y-axis range 0-1, interval 0.1
 axis square;
 hold on;
 % Add title and tags
 %title('Symmetric case of PoA in terms of average max age.');
-xlabel('Reward Rate \beta','FontSize',15);
-ylabel('Price of Anarchy (PoA)','FontSize',15);
-
-
+xlabel('Reward Rate \beta','FontSize',35);
+ylabel('Price of Anarchy (PoA)','FontSize',35);
 plot(x,y21,'-d',x,y22,'-h',x,y23,'-x',x,y24,'-s',x,y25,'-+',x,y26,'-o','linewidth',2,'MarkerSize',5); % linear, color, marker
-legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS','FBFS','FontSize',15);   % Upper right corner mark
+legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS Strategy','FBFS Strategy','FontSize',15);   % Upper right corner mark
 grid on
 
 
 figure(3)
 axis([0 10 0 1]);
-set(gca,'XTick',[0:2:10]) %x-axis range 0-10, interval 2
-set(gca,'YTick',[0:0.1:1]) %Y-axis range 0-1, interval 0.1
+set(gca,'XTick',[0:2:10],'FontSize',25) %x-axis range 0-10, interval 2
+set(gca,'YTick',[0:0.1:1],'FontSize',25) %Y-axis range 0-1, interval 0.1
 axis square;
 hold on;
 % Add title and tags
 %title('Symmetric case of PoA in terms of average max age.');
-xlabel('Reward Rate \beta','FontSize',15);
-ylabel('Price of Anarchy (PoA)','FontSize',15);
-
-
+xlabel('Reward Rate \beta','FontSize',35);
+ylabel('Price of Anarchy (PoA)','FontSize',35);
 plot(x,y31,'-d',x,y32,'-h',x,y33,'-x',x,y34,'-s',x,y35,'-+',x,y36,'-o','linewidth',2,'MarkerSize',5); % linear, color, marker
-legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS','FBFS','FontSize',15);   % Upper right corner mark
+legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS Strategy','FBFS Strategy','FontSize',15);   % Upper right corner mark
 grid on
 
 
 figure(4)
 axis([0 10 0 1]);
-set(gca,'XTick',[0:2:10]) %x-axis range 0-10, interval 2
-set(gca,'YTick',[0:0.1:1]) %Y-axis range 0-1, interval 0.1
+set(gca,'XTick',[0:2:10],'FontSize',25) %x-axis range 0-10, interval 2
+set(gca,'YTick',[0:0.1:1],'FontSize',25) %Y-axis range 0-1, interval 0.1
 axis square;
 hold on;
 % Add title and tags
 %title('Symmetric case of PoA in terms of average max age.');
-xlabel('Reward Rate \beta','FontSize',15);
-ylabel('Price of Anarchy (PoA)','FontSize',15);
-
-
-plot(x,y41,'-d',x,y42,'-h',x,y43,'-x',x,y44,'-s',x,y45,'-+',x,y46,'-o','linewidth',2,'MarkerSize',5); % linear, color, marker
-legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS Strategy','FBFS Strategy','FontSize',15);   % Upper right corner mark
+xlabel('Reward Rate \beta','FontSize',35);
+ylabel('Price of Anarchy (PoA)','FontSize',35);
+plot(x,y41,'-d',x,y42,'-h',x,y43,'-x',x,y44,'-s',x,y45,'-+',x,y46,'-o','linewidth',2,'MarkerSize',10); % linear, color, marker
+legend('Incentive Strategy','Without Incentive','Greedy Strategy','Random Strategy','LBFS Strategy','FBFS Strategy','FontSize',25); % Upper right corner mark
 grid on
-

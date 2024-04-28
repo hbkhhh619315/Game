@@ -11,6 +11,8 @@ end
 x = [];
 y1= [];
 y2= [];
+y3= [];
+y4= [];
 
 a=0;
 while a<=1.00 %β
@@ -26,6 +28,13 @@ while a<=1.00 %β
     i =1;
     while i <= sevices
         aoi = [aoi;0];
+        i=i+1;
+    end
+
+    without_aoi =[];
+    i =1;
+    while i <= sevices
+        without_aoi = [without_aoi;0];
         i=i+1;
     end
 
@@ -55,10 +64,12 @@ while a<=1.00 %β
     end
 
     opt.maxaoi=0;
-    opt.totalaoi=0;
     maxaoi=0;
-    totalaoi=0;
+    without_maxaoi=0;
 
+    opt.totalaoi=0;
+    totalaoi=0;
+    without_totalaoi=0;
 
     t=1;
     T=10000;%num of time t
@@ -133,6 +144,28 @@ while a<=1.00 %β
             account3(B(1))=account3(B(1))+1;%Incentive statistics of the number of calls of each node
             D3=a;
         end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        [M,I] = max(without_aoi);
+        B=[I;M];
+        without_maxaoi = without_maxaoi+B(2);%Cumulative opt without aoi
+
+        [M,I] = min(price);
+        B=[I;M];
+
+        k =1;
+        while k <= sevices
+            without_totalaoi = without_totalaoi+without_aoi(k);%Cumulative opt overall aoi
+            k=k+1;
+        end
+
+        j =1;
+        while j <= sevices
+            without_aoi(j) = without_aoi(j)+1;%without's Aoi overall +1
+            j=j+1;
+        end
+
+        without_aoi(I)=0;%After without selects the service node, aoi is set to zero.
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         t=t+1;
     end
@@ -140,15 +173,15 @@ while a<=1.00 %β
     if abs(a-0.01) < 0.001
         figure(1)
         axis([0 10 0 1500]);
-        set(gca,'XTick',[0:1:10]) %x axis range 0-10, interval 1
-        set(gca,'YTick',[0:100:1500]) %y axis range 0-2000, interval 100
+        set(gca,'XTick',[0:1:10],'FontSize',25) %x axis range 0-10, interval 1
+        set(gca,'YTick',[0:100:1500],'FontSize',25) %y axis range 0-2000, interval 100
         axis square;
         hold on;
 
         % Add title and tags
-        title('Service Frequency of PoIs');
-        xlabel('PoIs');
-        ylabel('Times');
+        title('Service Frequency of PoIs','FontSize',50);
+        xlabel('PoIs','FontSize',35);
+        ylabel('Times','FontSize',35);
 
 
         X = 1:1:sevices;
@@ -159,22 +192,22 @@ while a<=1.00 %β
         ytips = tbar.YEndPoints;
         labels = string(tbar.YData);
         text(xtips,ytips,labels,'HorizontalAlignment','center',...
-            'VerticalAlignment','bottom')
+            'VerticalAlignment','bottom','FontSize', 25)
 
         line([1:length(X)], Y, 'Color', 'r', 'LineStyle', '--', 'Marker', 'o')
     end
     if abs(a-0.10) < 0.001
         figure(2)
         axis([0 10 0 1200]);
-        set(gca,'XTick',[0:1:10]) %x axis range 0-10, interval 1
-        set(gca,'YTick',[0:100:1200]) %y axis range 0-2000, interval 100
+        set(gca,'XTick',[0:1:10],'FontSize',25) %x axis range 0-10, interval 1
+        set(gca,'YTick',[0:100:1200],'FontSize',25) %y axis range 0-2000, interval 100
         axis square;
         hold on;
 
         % Add title and tags
-        title('Service Frequency of PoIs');
-        xlabel('PoIs');
-        ylabel('Times');
+        title('Service Frequency of PoIs','FontSize',50);
+        xlabel('PoIs','FontSize',35);
+        ylabel('Times','FontSize',35);
 
 
         X = 1:1:sevices;
@@ -185,22 +218,22 @@ while a<=1.00 %β
         ytips = tbar.YEndPoints;
         labels = string(tbar.YData);
         text(xtips,ytips,labels,'HorizontalAlignment','center',...
-            'VerticalAlignment','bottom')
+            'VerticalAlignment','bottom','FontSize', 25)
 
         line([1:length(X)], Y, 'Color', 'r', 'LineStyle', '--', 'Marker', 'o')
     end
     if abs(a-0.50) < 0.001
         figure(3)
         axis([0 10 0 1200]);
-        set(gca,'XTick',[0:1:10]) %x axis range 0-10, interval 1
-        set(gca,'YTick',[0:100:1200]) %y axis range 0-2000, interval 100
+        set(gca,'XTick',[0:1:10],'FontSize',25) %x axis range 0-10, interval 1
+        set(gca,'YTick',[0:100:1200],'FontSize',25) %y axis range 0-2000, interval 100
         axis square;
         hold on;
 
         % Add title and tags
-        title('Service Frequency of PoIs');
-        xlabel('PoIs');
-        ylabel('Times');
+        title('Service Frequency of PoIs','FontSize',50);
+        xlabel('PoIs','FontSize',35);
+        ylabel('Times','FontSize',35);
 
 
         X = 1:1:sevices;
@@ -211,7 +244,7 @@ while a<=1.00 %β
         ytips = tbar.YEndPoints;
         labels = string(tbar.YData);
         text(xtips,ytips,labels,'HorizontalAlignment','center',...
-            'VerticalAlignment','bottom')
+            'VerticalAlignment','bottom','FontSize', 25)
 
         line([1:length(X)], Y, 'Color', 'r', 'LineStyle', '--', 'Marker', 'o')
     end
@@ -219,6 +252,8 @@ while a<=1.00 %β
     x = [x;a] ;
     y1= [y1;1-opt.maxaoi/maxaoi];
     y2= [y2;1-opt.totalaoi/totalaoi];
+    y3= [y3;1-opt.maxaoi/without_maxaoi];
+    y4= [y4;1-opt.totalaoi/without_totalaoi];
 
     a=a+0.01;
 
@@ -226,15 +261,15 @@ end
 
 figure(4)
 axis([0 1 0 1]);
-set(gca,'XTick',[0:0.2:1]) %x axis range 0-1, interval 0.2
-set(gca,'YTick',[0:0.1:1]) %y axis range 0-1, interval 0.1
+set(gca,'XTick',[0:0.2:1],'FontSize',25) %x axis range 0-1, interval 0.2
+set(gca,'YTick',[0:0.1:1],'FontSize',25) %y axis range 0-1, interval 0.1
 axis square;
 hold on;
 % Add title and tags
 %title('PoA');
-xlabel('Reward Rate \beta','FontSize',15);
-ylabel('Price of Anarchy (PoA)','FontSize',15);
+xlabel('Reward Rate \beta','FontSize',35);
+ylabel('Price of Anarchy (PoA)','FontSize',35);
 
-plot(x,y1,'-*r',x,y2,'-ob','linewidth',2,'MarkerSize',6); % linear, color, marker
-legend('AVG Maximum Age','AVG Total Age','FontSize',15);   % Upper right corner mark
+plot(x,y1,'-db',x,y2,'-oc',x,y3,'-hg',x,y4,'-xr','linewidth',2,'MarkerSize',10); % linear, color, marker
+legend('AVG Maximum Age of Incentive Strategy','AVG Total Age of Incentive Strategy','AVG Maximum Age of without Incentive','AVG Total Age of without Incentive','FontSize',20);   % Upper right corner mark
 grid on
