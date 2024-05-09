@@ -1363,10 +1363,10 @@ set(gca,'yticklabel',{'\gamma=0','\gamma=2','\gamma=5','\gamma=10'},'FontSize',3
 zlim([0,10000]); %z coordinate axis scale value
 hXLabel = xlabel('PoIs','Rotation',18,'Position',[5 6.5 5],'FontSize',50);
 %hYLabel = ylabel('γ','Rotation',-40,'Position',[-1 2 0]);
-hZLabel = zlabel('Times','Rotation',-90,'Position',[-1 0 800],'FontSize',50);
+hZLabel = zlabel('Times','Rotation',-90,'Position',[-2 0 7000],'FontSize',50);
 set(gca,'XGrid', 'off', 'YGrid', 'off','ZGrid', 'on')
-hTitle = title('Service Frequency of PoIs \{\beta=10\}');
-set(hTitle, 'FontSize', 50, 'FontWeight' , 'bold')
+%hTitle = title('Service Frequency of PoIs \{\beta=10\}');
+%set(hTitle, 'FontSize', 50, 'FontWeight' , 'bold')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure(2)
 axis([0 10 0 1]);

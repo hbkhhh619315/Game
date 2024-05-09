@@ -170,85 +170,6 @@ while a<=1.00 %β
         t=t+1;
     end
 
-    if abs(a-0.01) < 0.001
-        figure(1)
-        axis([0 10 0 1500]);
-        set(gca,'XTick',[0:1:10],'FontSize',25) %x axis range 0-10, interval 1
-        set(gca,'YTick',[0:100:1500],'FontSize',25) %y axis range 0-2000, interval 100
-        axis square;
-        hold on;
-
-        % Add title and tags
-        title('Service Frequency of PoIs','FontSize',50);
-        xlabel('PoIs','FontSize',35);
-        ylabel('Times','FontSize',35);
-
-
-        X = 1:1:sevices;
-        Y = account1;
-        tbar=bar(X,Y);
-
-        xtips = tbar.XEndPoints;
-        ytips = tbar.YEndPoints;
-        labels = string(tbar.YData);
-        text(xtips,ytips,labels,'HorizontalAlignment','center',...
-            'VerticalAlignment','bottom','FontSize', 25)
-
-        line([1:length(X)], Y, 'Color', 'r', 'LineStyle', '--', 'Marker', 'o')
-    end
-    if abs(a-0.10) < 0.001
-        figure(2)
-        axis([0 10 0 1200]);
-        set(gca,'XTick',[0:1:10],'FontSize',25) %x axis range 0-10, interval 1
-        set(gca,'YTick',[0:100:1200],'FontSize',25) %y axis range 0-2000, interval 100
-        axis square;
-        hold on;
-
-        % Add title and tags
-        title('Service Frequency of PoIs','FontSize',50);
-        xlabel('PoIs','FontSize',35);
-        ylabel('Times','FontSize',35);
-
-
-        X = 1:1:sevices;
-        Y = account2;
-        tbar=bar(X,Y);
-
-        xtips = tbar.XEndPoints;
-        ytips = tbar.YEndPoints;
-        labels = string(tbar.YData);
-        text(xtips,ytips,labels,'HorizontalAlignment','center',...
-            'VerticalAlignment','bottom','FontSize', 25)
-
-        line([1:length(X)], Y, 'Color', 'r', 'LineStyle', '--', 'Marker', 'o')
-    end
-    if abs(a-0.50) < 0.001
-        figure(3)
-        axis([0 10 0 1200]);
-        set(gca,'XTick',[0:1:10],'FontSize',25) %x axis range 0-10, interval 1
-        set(gca,'YTick',[0:100:1200],'FontSize',25) %y axis range 0-2000, interval 100
-        axis square;
-        hold on;
-
-        % Add title and tags
-        title('Service Frequency of PoIs','FontSize',50);
-        xlabel('PoIs','FontSize',35);
-        ylabel('Times','FontSize',35);
-
-
-        X = 1:1:sevices;
-        Y = account3;
-        tbar=bar(X,Y);
-
-        xtips = tbar.XEndPoints;
-        ytips = tbar.YEndPoints;
-        labels = string(tbar.YData);
-        text(xtips,ytips,labels,'HorizontalAlignment','center',...
-            'VerticalAlignment','bottom','FontSize', 25)
-
-        line([1:length(X)], Y, 'Color', 'r', 'LineStyle', '--', 'Marker', 'o')
-    end
-
     x = [x;a] ;
     y1= [y1;1-opt.maxaoi/maxaoi];
     y2= [y2;1-opt.totalaoi/totalaoi];
@@ -259,7 +180,30 @@ while a<=1.00 %β
 
 end
 
-figure(4)
+figure(1)
+account1=account1';
+account2=account2';
+account3=account3';
+data = [account1;account2;account3];
+b = bar3(data,0.7); %0.7Represents the width of a single column
+colorbar %Z-axis numerical color bar
+caxis([1,1500]); %Color bar value range
+for k = 1:length(b)
+    zdata = b(k).ZData;
+    b(k).CData = zdata;
+    b(k).FaceColor = 'interp';
+end
+set(gca,'xticklabel',{'PoI 1','PoI 2','PoI 3','PoI 4','PoI 5','PoI 6','PoI 7','PoI 8','PoI 9','PoI 10'},'FontSize',30) %x coordinate axis scale value
+set(gca,'yticklabel',{'\beta=0.01','\beta=0.1','\beta=0.5'},'FontSize',30) %y coordinate axis scale value
+zlim([0,1500]); %z coordinate axis scale value
+hXLabel = xlabel('PoIs','Rotation',18,'Position',[5 6.5 5],'FontSize',50);
+%hYLabel = ylabel('γ','Rotation',-40,'Position',[-1 2 0]);
+hZLabel = zlabel('Times','Rotation',-90,'Position',[-2 0 1000],'FontSize',50);
+set(gca,'XGrid', 'off', 'YGrid', 'off','ZGrid', 'on')
+%hTitle = title('Service Frequency of PoIs \{\beta=10\}');
+%set(hTitle, 'FontSize', 50, 'FontWeight' , 'bold')
+
+figure(2)
 axis([0 1 0 1]);
 set(gca,'XTick',[0:0.2:1],'FontSize',25) %x axis range 0-1, interval 0.2
 set(gca,'YTick',[0:0.1:1],'FontSize',25) %y axis range 0-1, interval 0.1
